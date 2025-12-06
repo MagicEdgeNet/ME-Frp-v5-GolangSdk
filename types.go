@@ -26,8 +26,8 @@ type UserInfo struct {
 	FriendlyGroup string `json:"friendlyGroup"`
 }
 
-// Tunnel represents a proxy tunnel configuration
-type Tunnel struct {
+// Proxy represents a proxy proxy configuration
+type Proxy struct {
 	ProxyID              int    `json:"proxyId"`
 	Username             string `json:"username"`
 	ProxyName            string `json:"proxyName"`
@@ -111,121 +111,121 @@ type UserGroup struct {
 
 // FrpToken represents the user's frp token
 type FrpToken struct {
-Token string `json:"token"`
+	Token string `json:"token"`
 }
 
-// TunnelConfig represents a single tunnel configuration
-type TunnelConfig struct {
-Config string `json:"config"`
-Type   string `json:"type"`
+// ProxyConfig represents a single proxy configuration
+type ProxyConfig struct {
+	Config string `json:"config"`
+	Type   string `json:"type"`
 }
 
-// CreateTunnelRequest represents the request to create a tunnel
-type CreateTunnelRequest struct {
-ProxyName            string `json:"proxyName"`
-ProxyType            string `json:"proxyType"`
-LocalIP              string `json:"localIp"`
-LocalPort            int    `json:"localPort"`
-RemotePort           int    `json:"remotePort"`
-NodeID               int    `json:"nodeId"`
-Domain               string `json:"domain,omitempty"`
-ProxyProtocolVersion string `json:"proxyProtocolVersion,omitempty"`
-UseEncryption        bool   `json:"useEncryption"`
-UseCompression       bool   `json:"useCompression"`
-HostHeaderRewrite    string `json:"hostHeaderRewrite,omitempty"`
-HeaderXFromWhere     string `json:"headerXFromWhere,omitempty"`
+// CreateProxyRequest represents the request to create a proxy
+type CreateProxyRequest struct {
+	ProxyName            string `json:"proxyName"`
+	ProxyType            string `json:"proxyType"`
+	LocalIP              string `json:"localIp"`
+	LocalPort            int    `json:"localPort"`
+	RemotePort           int    `json:"remotePort"`
+	NodeID               int    `json:"nodeId"`
+	Domain               string `json:"domain,omitempty"`
+	ProxyProtocolVersion string `json:"proxyProtocolVersion,omitempty"`
+	UseEncryption        bool   `json:"useEncryption"`
+	UseCompression       bool   `json:"useCompression"`
+	HostHeaderRewrite    string `json:"hostHeaderRewrite,omitempty"`
+	HeaderXFromWhere     string `json:"headerXFromWhere,omitempty"`
 }
 
-// ToggleTunnelRequest represents the request to toggle a tunnel
-type ToggleTunnelRequest struct {
-ProxyID    int  `json:"proxyId"`
-IsDisabled bool `json:"isDisabled"`
+// ToggleProxyRequest represents the request to toggle a proxy
+type ToggleProxyRequest struct {
+	ProxyID    int  `json:"proxyId"`
+	IsDisabled bool `json:"isDisabled"`
 }
 
 // IDRequest represents a request with just a proxy ID (Delete, Kick, Config)
 type IDRequest struct {
-ProxyID int `json:"proxyId"`
+	ProxyID int `json:"proxyId"`
 }
 
-// ConfigRequest represents a request for tunnel config
+// ConfigRequest represents a request for proxy config
 type ConfigRequest struct {
-ProxyID int    `json:"proxyId"`
-Format  string `json:"format"` // "toml", "json", "yml", "ini"
+	ProxyID int    `json:"proxyId"`
+	Format  string `json:"format"` // "toml", "json", "yml", "ini"
 }
 
 // CaptchaRequest represents a request requiring a captcha token
 type CaptchaRequest struct {
-CaptchaToken string `json:"captchaToken"`
+	CaptchaToken string `json:"captchaToken"`
 }
 
 // ResetTokenResponse represents the response for resetting access key
 type ResetTokenResponse struct {
-NewToken string `json:"newToken"`
+	NewToken string `json:"newToken"`
 }
 
 // StoreItem represents an item in the store
 type StoreItem struct {
-Type                     string  `json:"type"`
-Name                     string  `json:"name"`
-Price                    float64 `json:"price"`
-Unit                     string  `json:"unit"`
-Description              string  `json:"description"`
-Enabled                  bool    `json:"enabled"`
-DiscountEnabled          bool    `json:"discountEnabled"`
-DiscountPrice            float64 `json:"discountPrice"`
-DiscountStartTime        int64   `json:"discountStartTime"`
-DiscountEndTime          int64   `json:"discountEndTime"`
-CurrentPrice             float64 `json:"currentPrice"`
-IsDiscountActive         bool    `json:"isDiscountActive"`
-DiscountRemainingSeconds int64   `json:"discountRemainingSeconds"`
+	Type                     string  `json:"type"`
+	Name                     string  `json:"name"`
+	Price                    float64 `json:"price"`
+	Unit                     string  `json:"unit"`
+	Description              string  `json:"description"`
+	Enabled                  bool    `json:"enabled"`
+	DiscountEnabled          bool    `json:"discountEnabled"`
+	DiscountPrice            float64 `json:"discountPrice"`
+	DiscountStartTime        int64   `json:"discountStartTime"`
+	DiscountEndTime          int64   `json:"discountEndTime"`
+	CurrentPrice             float64 `json:"currentPrice"`
+	IsDiscountActive         bool    `json:"isDiscountActive"`
+	DiscountRemainingSeconds int64   `json:"discountRemainingSeconds"`
 }
 
 // OperationLog represents a user operation log entry
 type OperationLog struct {
-LogID     int    `json:"logId"`
-Category  string `json:"category"`
-Details   string `json:"details"`
-IPAddress string `json:"ipAddress"`
-Status    string `json:"status"`
-CreatedAt string `json:"createdAt"`
+	LogID     int    `json:"logId"`
+	Category  string `json:"category"`
+	Details   string `json:"details"`
+	IPAddress string `json:"ipAddress"`
+	Status    string `json:"status"`
+	CreatedAt string `json:"createdAt"`
 }
 
 // OperationLogList represents the response for operation logs
 type OperationLogList struct {
-Data       []OperationLog `json:"data"`
-Total      int            `json:"total"`
-Page       int            `json:"page"`
-PageSize   int            `json:"pageSize"`
-TotalPages int            `json:"totalPages"`
+	Data       []OperationLog `json:"data"`
+	Total      int            `json:"total"`
+	Page       int            `json:"page"`
+	PageSize   int            `json:"pageSize"`
+	TotalPages int            `json:"totalPages"`
 }
 
 // SystemStatus represents the system status
 type SystemStatus struct {
-Status int    `json:"status"` // 0 正常 1 降级 2 离线
-Remark string `json:"remark"`
+	Status int    `json:"status"` // 0 正常 1 降级 2 离线
+	Remark string `json:"remark"`
 }
 
 // NodeToken represents the node token response
 type NodeToken struct {
-ServerPort int    `json:"serverPort"`
-Token      string `json:"token"`
+	ServerPort int    `json:"serverPort"`
+	Token      string `json:"token"`
 }
 
-// MultipleConfigResponse represents the response for multiple tunnel configs
+// MultipleConfigResponse represents the response for multiple proxy configs
 type MultipleConfigResponse struct {
-Config string `json:"config"`
-Type   string `json:"type"`
+	Config string `json:"config"`
+	Type   string `json:"type"`
 }
 
-// MultipleConfigRequest represents the request for multiple tunnel configs
+// MultipleConfigRequest represents the request for multiple proxy configs
 type MultipleConfigRequest struct {
-ProxyIDs []int  `json:"proxyIds"`
-Format   string `json:"format"`
+	ProxyIDs []int  `json:"proxyIds"`
+	Format   string `json:"format"`
 }
 
 // UserGroupsResponse represents the response for user groups
 type UserGroupsResponse struct {
-Groups []UserGroup `json:"groups"`
+	Groups []UserGroup `json:"groups"`
 }
 
 // UserLogStats represents the user log statistics

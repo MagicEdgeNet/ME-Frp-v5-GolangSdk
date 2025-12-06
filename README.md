@@ -5,7 +5,7 @@ ME Frp 5.0 官方 Go 语言 SDK，提供完整的 API 封装。
 ## 安装
 
 ```bash
-go get github.com/ME-Frp/Golang-Sdk
+go get github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk
 ```
 
 ## 快速开始
@@ -19,7 +19,7 @@ import (
 "fmt"
 "log"
 
-"github.com/ME-Frp/Golang-Sdk"
+"github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk"
 )
 
 func main() {
@@ -65,7 +65,7 @@ import (
 "fmt"
 "log"
 
-"github.com/ME-Frp/Golang-Sdk"
+"github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk"
 )
 
 func main() {
@@ -105,18 +105,18 @@ import (
 "fmt"
 "log"
 
-"github.com/ME-Frp/Golang-Sdk"
+"github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk"
 )
 
 func main() {
 	client := mefrp.NewClient("YOUR_API_TOKEN")
 
 	// 获取隧道列表
-	tunnels, err := client.GetTunnelList()
+	proxies, err := client.GetProxyList()
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, t := range tunnels {
+	for _, t := range proxies {
 		status := "Offline"
 		if t.IsOnline {
 			status = "Online"
@@ -125,8 +125,8 @@ func main() {
 	}
 
 	// 创建隧道
-	err = client.CreateTunnel(mefrp.CreateTunnelRequest{
-ProxyName:      "MyTunnel",
+	err = client.CreateProxy(mefrp.CreateProxyRequest{
+ProxyName:      "MyProxy",
 ProxyType:      "tcp",
 LocalIP:        "127.0.0.1",
 LocalPort:      8080,
@@ -138,23 +138,23 @@ UseCompression: false,
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Tunnel created successfully!")
+	fmt.Println("Proxy created successfully!")
 
 	// 获取隧道配置（用于启动 frpc）
-	config, err := client.GetTunnelConfig(12345, "toml")
+	config, err := client.GetProxyConfig(12345, "toml")
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("Config:\n%s\n", config.Config)
 
 	// 启用/禁用隧道
-	err = client.ToggleTunnel(12345, true) // true = 禁用
+	err = client.ToggleProxy(12345, true) // true = 禁用
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// 删除隧道
-	err = client.DeleteTunnel(12345)
+	err = client.DeleteProxy(12345)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -170,7 +170,7 @@ import (
 "fmt"
 "log"
 
-"github.com/ME-Frp/Golang-Sdk"
+"github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk"
 )
 
 func main() {
@@ -207,7 +207,7 @@ import (
 "fmt"
 "log"
 
-"github.com/ME-Frp/Golang-Sdk"
+"github.com/MagicEdgeNet/MEFrp-v5-Golang-Sdk"
 )
 
 func main() {
@@ -253,14 +253,14 @@ stats.Users, stats.Nodes, stats.Proxies)
 - `GetUserLogStats()` - 获取日志统计
 
 ### 隧道相关
-- `GetTunnelList()` - 获取隧道列表
-- `CreateTunnel(req)` - 创建隧道
-- `UpdateTunnel(req)` - 更新隧道
-- `DeleteTunnel(proxyID)` - 删除隧道
-- `KickTunnel(proxyID)` - 强制下线隧道
-- `ToggleTunnel(proxyID, isDisabled)` - 启用/禁用隧道
-- `GetTunnelConfig(proxyID, format)` - 获取单一隧道配置
-- `GetMultipleTunnelConfigs(proxyIDs, format)` - 获取多个隧道配置
+- `GetProxyList()` - 获取隧道列表
+- `CreateProxy(req)` - 创建隧道
+- `UpdateProxy(req)` - 更新隧道
+- `DeleteProxy(proxyID)` - 删除隧道
+- `KickProxy(proxyID)` - 强制下线隧道
+- `ToggleProxy(proxyID, isDisabled)` - 启用/禁用隧道
+- `GetProxyConfig(proxyID, format)` - 获取单一隧道配置
+- `GetMultipleProxyConfigs(proxyIDs, format)` - 获取多个隧道配置
 
 ### 节点相关
 - `GetNodeList()` - 获取节点列表
@@ -306,7 +306,7 @@ mefrp.WithUserAgent("MyApp/1.0"),
 不要使用 `MEFrp-Client` 开头的 User-Agent。
 
 ### 更新隧道接口说明
-`UpdateTunnel` 接口的路径在官方文档中显示为 `/auth/proxy/create`，但这可能是文档错误。SDK 暂时使用 `/auth/proxy/update` 作为路径。如果调用失败，请尝试使用 `CreateTunnel` 方法。
+`UpdateProxy` 接口的路径在官方文档中显示为 `/auth/proxy/create`，但这可能是文档错误。SDK 暂时使用 `/auth/proxy/update` 作为路径。如果调用失败，请尝试使用 `CreateProxy` 方法。
 
 ### 密码修改警告
 调用 `ChangePassword` 会**重置启动令牌和访问密钥**，请谨慎操作。
@@ -325,7 +325,7 @@ mefrp.WithUserAgent("MyApp/1.0"),
 ├── node.go             # 节点相关接口
 ├── public.go           # 公共信息接口
 ├── system.go           # 系统状态接口
-├── tunnel.go           # 隧道管理接口
+├── proxy.go           # 隧道管理接口
 ├── types.go            # 数据结构定义
 └── user.go             # 用户信息接口
 ```

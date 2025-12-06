@@ -35,18 +35,18 @@ func (c *Client) GetNodeStatus() ([]NodeStatus, error) {
 // GetNodeToken retrieves the token for a specific node
 func (c *Client) GetNodeToken(nodeID int) (*NodeToken, error) {
 	// Note: The API doc says request body with nodeId, but it's a GET request?
-// Doc: /auth/node/secret GET
-// Request Body: { nodeId: number }
-// GET requests with body are non-standard but possible.
-// However, usually it's a query param for GET.
+	// Doc: /auth/node/secret GET
+	// Request Body: { nodeId: number }
+	// GET requests with body are non-standard but possible.
+	// However, usually it's a query param for GET.
 	// Let's try query param first, or maybe it's POST?
 	// The doc explicitly says "get".
 	// Let's try sending body with GET request. Go's http.NewRequest allows body in GET.
-	
+
 	req := struct {
 		NodeID int `json:"nodeId"`
 	}{NodeID: nodeID}
-	
+
 	var resp Response[NodeToken]
 	// Using GET with body as per doc, though unusual.
 	err := c.request("GET", "/auth/node/secret", req, &resp)
@@ -61,7 +61,7 @@ func (c *Client) GetNodeToken(nodeID int) (*NodeToken, error) {
 	return &resp.Data, nil
 }
 
-// GetNodeConnectionList retrieves the connection addresses for nodes (only for created tunnels)
+// GetNodeConnectionList retrieves the connection addresses for nodes (only for created proxies)
 func (c *Client) GetNodeConnectionList() ([]NodeConnection, error) {
 	var resp Response[[]NodeConnection]
 	err := c.request("GET", "/auth/node/nameList", nil, &resp)

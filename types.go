@@ -59,7 +59,6 @@ type Proxy struct {
 	HTTPUser             string `json:"httpUser"`
 	HTTPPassword         string `json:"httpPassword"`
 	TransportProtocol    string `json:"transportProtocol"`
-	Tags                 string `json:"tags"`
 }
 
 // ProxyListResponse represents the response for proxy list
@@ -89,6 +88,8 @@ type Node struct {
 	TotalTrafficOut int64  `json:"totalTrafficOut"`
 	UpTime          int64  `json:"upTime"`
 	Version         string `json:"version"`
+	DonateID        int64  `json:"donateId"`
+	DonateUser      string `json:"donateUser"`
 }
 
 // NodeStatus represents the status of a node
@@ -167,21 +168,22 @@ type UpdateProxyRequest struct {
 	LocalIP              string            `json:"localIp"`
 	LocalPort            int32             `json:"localPort"`
 	RemotePort           int32             `json:"remotePort"`
+	NodeID               int64             `json:"nodeId"`
 	Domain               string            `json:"domain"`
-	Locations            string            `json:"locations"`
-	AccessKey            string            `json:"accessKey"`
-	HostHeaderRewrite    string            `json:"hostHeaderRewrite"`
+	ProxyProtocolVersion string            `json:"proxyProtocolVersion"`
 	UseEncryption        bool              `json:"useEncryption"`
 	UseCompression       bool              `json:"useCompression"`
-	ProxyProtocolVersion string            `json:"proxyProtocolVersion"`
-	HttpPlugin           string            `json:"httpPlugin"`
-	CrtPath              string            `json:"crtPath"`
-	KeyPath              string            `json:"keyPath"`
-	RequestHeaders       map[string]string `json:"requestHeaders"`
-	ResponseHeaders      map[string]string `json:"responseHeaders"`
-	HTTPUser             string            `json:"httpUser"`
-	HTTPPassword         string            `json:"httpPassword"`
-	TransportProtocol    string            `json:"transportProtocol"`
+	HostHeaderRewrite    string            `json:"hostHeaderRewrite"`
+	Locations            string            `json:"locations,omitempty"`
+	AccessKey            string            `json:"accessKey,omitempty"`
+	HttpPlugin           string            `json:"httpPlugin,omitempty"`
+	CrtPath              string            `json:"crtPath,omitempty"`
+	KeyPath              string            `json:"keyPath,omitempty"`
+	RequestHeaders       map[string]string `json:"requestHeaders,omitempty"`
+	ResponseHeaders      map[string]string `json:"responseHeaders,omitempty"`
+	HTTPUser             string            `json:"httpUser,omitempty"`
+	HTTPPassword         string            `json:"httpPassword,omitempty"`
+	TransportProtocol    string            `json:"transportProtocol,omitempty"`
 }
 
 // ToggleProxyRequest represents the request to toggle a proxy
